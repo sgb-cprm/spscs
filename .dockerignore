@@ -1,0 +1,6 @@
+Dockerfile
+downloads/
+uploads/
+ternary_plots/
+Procfile
+.git/
