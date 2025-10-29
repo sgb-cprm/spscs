@@ -1,0 +1,14 @@
+{{- $scriptName := (first (first .Values.ingress.hosts).paths).path -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "spscs.fullname" . }}
+  labels:
+    {{- include "spscs.labels" . | nindent 4 }}
+data:
+  NUM_WORKERS: "{{ .Values.config.numWorkers }}"
+  {{- if .Values.ingress.enabled }}
+  {{- if ne $scriptName "/"}}
+  SCRIPT_NAME: {{ $scriptName | quote }}
+  {{- end }}
+  {{- end }}
